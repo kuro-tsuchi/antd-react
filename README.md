@@ -33,6 +33,40 @@ yarn remove [package]
 
 ## 项目主结构
 
+|-- src
+| |-- assets -- 公共资产
+| | |-- less // 公共样式
+| | |-- images // 公共本地图片
+| |-- components -- 公共 UI 组件
+| |-- constants -- 公共常量
+| |-- layouts -- 页面布局组件
+| | |-- LeftBar
+| | |-- Header
+| | |-- Footer
+| | |-- index.js
+| | |-- index.less
+| |-- pages -- 页面组件
+| | |-- Home
+| | | |-- index.js
+| | | |-- index.less
+| | | |-- constants.js -- Home 内常量
+| | | |-- components -- Home 拆分组件
+| | | |-- images -- Home 内图片
+| |-- routes -- 是否进行 -- immutable 代码分割 || 按需加载
+| | |-- routeClass -- 路由分类
+| | | |-- class1.js
+| | |-- index.js
+| |-- redux
+| | |-- home
+| | | |-- actionType.js -- Action Type
+| | | |-- action.js -- Action Creator
+| | | |-- reducer.js -- Reducer
+| | |-- rootReducer.js -- Reducer 汇总
+| | |-- store.js -- store
+| |-- utils -- 公共工具 || 方法
+| | |-- asyncComponent.jsx
+| | |-- http.js -- axios 封装
+| |-- index.js
 
 ## 项目技术栈
 
