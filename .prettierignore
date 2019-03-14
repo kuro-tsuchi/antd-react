@@ -1,0 +1,15 @@
+node_modules/
+build/
+config/
+dist/
+cfg/
+imgs/
+lib/
+images/
+*.min.js
+.vscode
+meta/
+*.map
+*.png
+*.jpg
+*.gif

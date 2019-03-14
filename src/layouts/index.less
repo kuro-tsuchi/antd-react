@@ -1,0 +1,36 @@
+@bms-layout: ~'@{bms-prefix}-layout';
+.@{bms-layout} {
+    // 清除浮动影响
+    clear: both;
+    height: 0;
+    &-right {
+        margin-left: 256px;
+    }
+    &-title {
+        font-size: 1.5em;
+    }
+    &-intro {
+        font-size: large;
+        margin: 10px;
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
+    &-content {
+        ul {
+            list-style-type: none;
+        }
+        li {
+            display: inline-block;
+            width: 33%;
+            line-height: 40px;
+        }
+    }
+    @keyframes landins-layout-logo-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}

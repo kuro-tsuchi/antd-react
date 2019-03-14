@@ -1,0 +1,20 @@
+@bms-layout-left: ~'@{bms-prefix}-layout-left';
+.@{bms-layout-left} {
+    float: left;
+    width: 256px;
+    height: 100%;
+    overflow: hidden;
+    padding-bottom: 9999px;
+    margin-bottom: -9999px;
+    border-right: 1px solid #e8e8e8;
+    a {
+        color: rgba(0, 0, 0, 0.65);
+        text-decoration: none;
+        &:hover {
+            color: @color-blue;
+        }
+    }
+    .ant-menu-item-selected a {
+        color: @color-blue;
+    }
+}
