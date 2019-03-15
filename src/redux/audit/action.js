@@ -2,22 +2,22 @@ import * as types from './action-type'; // Action Types
 
 // Action Creators
 /**
- * @method 更新 Home 信息
+ * @method 更新 Audit 信息
  * @param {Object} data
  */
-export function updateHomeInfo(data) {
+export function updateAuditInfo(data) {
     return {
-        type: types.UPDATE_INFO,
+        type: types.AUDIT_UPDATE_INFO,
         data
     };
 }
 
-// 重置 Home 信息
-export function resetHomeInfo() {
+// 重置 Audit 信息
+export function resetAuditInfo() {
     return function(dispatch, getState) {
         dispatch(
-            updateHomeInfo({
-                name: 'Home'
+            updateAuditInfo({
+                result: 'Waiting 。。。'
             })
         );
     };

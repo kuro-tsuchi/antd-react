@@ -1,5 +1,11 @@
+/*
+ * @Author: wqjiao
+ * @Date: 2019-03-15 18:09:39
+ * @Last Modified by: wqjiao
+ * @Last Modified time: 2019-03-15 18:19:14
+ * @Description: LeftBar 页面布局 -- 左侧边栏
+ */
 import React from 'react';
-// import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
 import {Menu, Icon, Button} from 'antd';
 import './index.less';
@@ -10,22 +16,23 @@ class LeftBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            openKeys: ['sub1'],
-            collapsed: false
+            openKeys: ['sub1'], // 默认打开的 Menu
+            collapsed: false // 缩小左侧边栏
         };
         this.rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
     }
 
-    // static contextTypes = {
-    //     router: PropTypes.object.isRequired,
-    // }
-
+    // 左侧边栏缩放切换
     toggleCollapsed = () => {
         this.setState({
             collapsed: !this.state.collapsed
         });
     };
 
+    /**
+     * @method SubMenu 展开/关闭的回调
+     * @param [Array] 当前展开的 SubMenu 菜单项 key 数组
+     */
     onOpenChange = openKeys => {
         const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
 
@@ -38,18 +45,12 @@ class LeftBar extends React.Component {
         }
     };
 
-    handleClick = () => {
-        this.props.history.push('/HighComponent?cid=111');
-        // this.context.router.history.push('/about');
-    };
-
     render() {
         return (
             <div className="bms-layout-left" style={{width: 256}}>
                 <Button type="primary" onClick={this.toggleCollapsed} style={{marginBottom: 16}}>
                     <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
                 </Button>
-                <Button onClick={this.handleClick}>随便跳转</Button>
                 <Menu
                     openKeys={this.state.openKeys}
                     defaultSelectedKeys={['1']}
@@ -74,7 +75,7 @@ class LeftBar extends React.Component {
                         }
                     >
                         <Menu.Item key="2">
-                            <Link to="/NoMatch">NoMatch</Link>
+                            <Link to="/audit-ready-list">AuditReadyList</Link>
                         </Menu.Item>
                     </SubMenu>
                     <SubMenu
@@ -87,7 +88,7 @@ class LeftBar extends React.Component {
                         }
                     >
                         <Menu.Item key="3">
-                            <Link to="/NoMatch">NoMatch</Link>
+                            <Link to="/HelpCenter">HelpCenter</Link>
                         </Menu.Item>
                         <SubMenu key="sub3" title="Submenu">
                             <Menu.Item key="4">
@@ -102,4 +103,3 @@ class LeftBar extends React.Component {
 }
 
 export default withRouter(LeftBar);
-// export default LeftBar;

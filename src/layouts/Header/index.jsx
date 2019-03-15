@@ -1,3 +1,10 @@
+/*
+ * @Author: wqjiao
+ * @Date: 2019-03-15 18:09:05
+ * @Last Modified by: wqjiao
+ * @Last Modified time: 2019-03-15 18:09:25
+ * @Description: Header 页面布局 -- 整体头部
+ */
 import React, {Component} from 'react';
 import './index.less';
 

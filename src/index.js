@@ -7,6 +7,8 @@ import Layout from './layouts';
 import configureStore from './redux/store';
 let store = configureStore();
 
+require('./utils/axios');
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>

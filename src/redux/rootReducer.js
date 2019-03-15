@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 
-import homeReducer from './home/reducer';
+import auditReducer from './audit/reducer'; // 审核
 
 const reducers = {
-    home: homeReducer
+    audit: auditReducer
 };
 
 export default combineReducers(reducers);

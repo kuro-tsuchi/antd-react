@@ -2,13 +2,13 @@ import * as types from './action-type'; // Action Types
 
 // state
 let initState = {
-    name: '我是大英雄'
+    result: 'Waiting 。。。'
 };
 
 // Reducer
-export default function homeReducer(state = initState, action = {}) {
+export default function auditReducer(state = initState, action = {}) {
     switch (action.type) {
-        case types.UPDATE_INFO:
+        case types.AUDIT_UPDATE_INFO:
             return {...state, ...action.data};
         default:
             return state;

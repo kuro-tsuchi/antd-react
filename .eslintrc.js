@@ -46,7 +46,7 @@ module.exports = {
         "no-eval": 0, // 禁止使用eval
         "eqeqeq": 2, // 必须使用全等
         "no-multiple-empty-lines": [2, {"max": 2}], // 空行最多不能超过2行
-        // "camelcase": 2, // 强制驼峰法命名
+        "camelcase": 2, // 强制驼峰法命名
         "default-case": 2, // switch语句最后必须有default
         "key-spacing": [2, { "beforeColon": false, "afterColon": true }] // 对象字面量中冒号的前后空格
     }

@@ -481,7 +481,6 @@ module.exports = function(webpackEnv) {
                 {
                   loader: require.resolve('less-loader'),
                   options:{
-                    javascriptEnabled: true,
                     // modify-var会将所传入的参数写入所有less文件的底部，我们自己定义的变量会被覆盖
                     // 覆盖变量
                     modifyVars: {
@@ -489,7 +488,8 @@ module.exports = function(webpackEnv) {
                     },
                     // global-var 会将所传入的参数写入所有的less文件的顶部，我们可以在less文件中重写这些参数的值
                     // 变量前置
-                    globalVars: getLessVariables('./src/assets/less/theme.less')
+                    globalVars: getLessVariables('./src/assets/less/theme.less'),
+                    javascriptEnabled: true
                   }
                 },
               ],
