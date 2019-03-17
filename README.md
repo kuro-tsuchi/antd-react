@@ -35,7 +35,7 @@ yarn remove [package]
 
     ```
     |-- src
-    | |-- assets -- 公共资产
+    | |-- assets -- 公共资源
     | | |-- less // 公共样式
     | | |-- images // 公共本地图片
     | |-- common -- 公共 UI 组件
@@ -72,7 +72,7 @@ yarn remove [package]
     | | |-- rootReducer.js -- Reducer 汇总
     | | |-- store.js -- store
     | |-- utils -- 公共工具 || 方法
-    | | |-- asyncComponent.jsx
+    | | |-- asyncComponent.jsx -- 按需加载路由组件的公共方法
     | | |-- axios.js -- axios 封装
     | |-- index.js
     ```
@@ -215,6 +215,37 @@ shouldComponentUpdate(nextProps, nextState) {
     );
 }
 ```
+
+[facebook -- immutable 介绍](https://facebook.github.io/immutable-js/docs/#/)
+
+在 immutable 中 `fromJS()`允许对象的更深层次的嵌套,`is()` 与 `equals()` 用来判断两个不可变集合是否相等：
+
+The collections in Immutable.js are intended to be nested, allowing for deep trees of data, similar to JSON.
+
+```
+import { is, fromJS } from 'immutable';
+const nested = fromJS({ a: { b: { c: [ 3, 4, 5 ] } } });
+// Map { a: Map { b: Map { c: List [ 3, 4, 5 ] } } }
+
+// First consider:
+const obj1 = { a: 1, b: 2, c: 3 };
+const obj2 = { a: 1, b: 2, c: 3 };
+obj1 !== obj2; // two different instances are always not equal with ===
+
+const { Map, is } = require('immutable');
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = Map({ a: 1, b: 2, c: 3 });
+map1 !== map2; // two different instances are not reference-equal
+map1.equals(map2); // but are value-equal if they have the same values
+is(map1, map2); // alternatively can use the is() function
+```
+
+`fromJS(obj)` 把传入的obj封装成 `immutable` 对象，在赋值给新对象时传递的只有本身的值而不是指向内存的地址。
+    obj.set(属性名，属性值)给obj增加或修改属性，但obj本身并不变化，只返回修改后的对象
+    obj.get(属性名)从immutable对象中取得属性值
+
+优点：深拷贝/浅拷贝本身是很耗内存，而 `immutable` 本身有一套机制使内存消耗降到最低
+缺点：你多了一整套的API去学习，并且 `immutable` 提供的 `set,map`等对象容易与ES6新增的 `set,map` 对象弄混
 
 ## 项目规范
 
