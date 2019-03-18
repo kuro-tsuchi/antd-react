@@ -1,13 +1,13 @@
 /*
  * @Author: wqjiao
  * @Date: 2019-03-15 18:23:04
- * @Last Modified by:   wqjiao
- * @Last Modified time: 2019-03-15 18:23:04
+ * @Last Modified by: wqjiao
+ * @Last Modified time: 2019-03-18 13:55:16
  * @Description: NoMatch 未找到的页面
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import $axios from '../../utils/axios';
+import $axios from '@/utils/axios';
 
 const propTypes = {
     title: PropTypes.string
