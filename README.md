@@ -309,9 +309,11 @@ is(map1, map2); // alternatively can use the is() function
     import React from 'react';
     import { storiesOf } from '@storybook/react';
     import { action } from '@storybook/addon-actions';
-
-    // 引入组件
+    import {Provider} from 'react-redux';
+    import AuditReadyList from '../src/pages/AuditReadyList';
     import HelpCenter from '../src/pages/HelpCenter';
+    import configureStore from '../src/redux/store';
+    const store = configureStore();
 
     storiesOf('Button', module)
         .add('with text', () => (
@@ -328,7 +330,13 @@ is(map1, map2); // alternatively can use the is() function
         .add('with some emoji', () => (
             <HelpCenter title="HelpCenter" />
         ));
-
+        
+        
+    storiesOf('AuditReadyList', module)
+        .addDecorator(story => <Provider store={store}>{story()} </Provider>)
+        .add('all', () => (
+            <AuditReadyList />
+        ));
     ```
 
     - `storybook` 的的使用：[storybook examples](https://storybooks-official.netlify.com/?path=/story/ui-panel--no-panels)
@@ -373,7 +381,23 @@ is(map1, map2); // alternatively can use the is() function
         }
         ```
 
-    - storybook 与 redux 一起使用 -- [](https://stackoverflow.com/questions/45931928/redux-storybook-throws-warning-about-changing-store-on-the-fly-even-with-modul)
+    - storybook 与 redux 一起使用 -- [stackoverflow -- storybook redux](https://stackoverflow.com/questions/50968590/how-to-inject-a-window-variable-in-a-storybook)
+        在 stories 中添加 redux
+        ```js
+        import React from 'react';
+        import { storiesOf } from '@storybook/react';
+        import { action } from '@storybook/addon-actions';
+        import { Provider } from 'react-redux';
+        import AuditReadyList from '../src/pages/AuditReadyList';
+        import configureStore from '../src/redux/store';
+        const store = configureStore();
+        
+        storiesOf('AuditReadyList', module)
+        .addDecorator(story => <Provider store={store}>{story()} </Provider>)
+        .add('all', () => (
+            <AuditReadyList />
+        ));
+        ```
     
 
 ## 项目规范
