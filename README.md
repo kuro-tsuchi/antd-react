@@ -112,6 +112,9 @@ dueljs
 
 <!-- 代码分析工具 -->
 webpack-bundle-analyzer -- ^3.1.0
+storybook -- 开发与测试组件独立的工具
+    "@storybook/addon-actions": "^5.0.2",
+    "@storybook/react": "^5.0.2",
 ```
 
 ## router、redux 说明
@@ -246,6 +249,156 @@ is(map1, map2); // alternatively can use the is() function
 
 优点：深拷贝/浅拷贝本身是很耗内存，而 `immutable` 本身有一套机制使内存消耗降到最低
 缺点：你多了一整套的API去学习，并且 `immutable` 提供的 `set,map`等对象容易与ES6新增的 `set,map` 对象弄混
+
+* storybook
+
+    - 安装依赖包
+    ```
+    yarn add @storybook/react @storybook/addon-actions --dev
+    ```
+
+    - 创建 `.storybook/config.js`
+    ```js
+    import { configure } from '@storybook/react';
+
+    function loadStories() {
+        require('../stories/index.js');
+        // You can require as many stories as you need.
+    }
+
+    configure(loadStories, module);
+    ```
+
+    - 创建 `.storybook/webpack.config.js` 配置文件
+    ```js
+    module.exports = {
+        module: {
+            rules: [
+                {
+                    test: /\.css$/,
+                    loader: 'style-loader!css-loader'
+                },
+                {
+                    test: /\.less$/,
+                    use: [
+                        { loader: 'style-loader' },
+                        { loader: 'css-loader' },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                javascriptEnabled: true
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.(jpg|jpeg|gif|png)$/,
+                    loader: 'url-loader?limit=1024&name=images/[name].[ext]'
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|svg)$/,
+                    loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
+                }
+            ]
+        }
+    }
+    ```
+
+    - 创建 `stories/index.js` 搭建 `storybook`
+    ```js
+    import React from 'react';
+    import { storiesOf } from '@storybook/react';
+    import { action } from '@storybook/addon-actions';
+    import {Provider} from 'react-redux';
+    import AuditReadyList from '../src/pages/AuditReadyList';
+    import HelpCenter from '../src/pages/HelpCenter';
+    import configureStore from '../src/redux/store';
+    const store = configureStore();
+
+    storiesOf('Button', module)
+        .add('with text', () => (
+            <button onClick={action('clicked')}>Hello Button</button>
+        ))
+        .add('with some emoji', () => (
+            <button onClick={action('clicked')}>�� �� �� ��</button>
+        ));
+
+    storiesOf('HelpCenter', module)
+        .add('show HelpCenter', () => (
+            <HelpCenter title="HelpCenter" />
+        ))
+        .add('with some emoji', () => (
+            <HelpCenter title="HelpCenter" />
+        ));
+        
+        
+    storiesOf('AuditReadyList', module)
+        .addDecorator(story => <Provider store={store}>{story()} </Provider>)
+        .add('all', () => (
+            <AuditReadyList />
+        ));
+    ```
+
+    - `storybook` 的的使用：[storybook examples](https://storybooks-official.netlify.com/?path=/story/ui-panel--no-panels)
+
+* `storybook` 问题
+
+    - storybook 配置： `@` 及 less 变量的使用等 -- 解决
+        在 .storybook/webpack.config.js 中添加配置
+        ```js
+        resolve: {
+            alias: {
+                // Support React Native Web
+                // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+                'react-native': 'react-native-web',
+                '@': path.resolve('src'),
+            }
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.less$/,
+                    use: [
+                        { loader: 'style-loader' },
+                        { loader: 'css-loader' },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                javascriptEnabled: true,
+                                // modify-var会将所传入的参数写入所有less文件的底部，我们自己定义的变量会被覆盖
+                                // 覆盖变量
+                                modifyVars: {
+                                    'primary-color': '#1DA57A'
+                                },
+                                // global-var 会将所传入的参数写入所有的less文件的顶部，我们可以在less文件中重写这些参数的值
+                                // 变量前置
+                                globalVars: getLessVariables('./src/assets/less/theme.less'),
+                            }
+                        }
+                    ]
+                },
+            ]
+        }
+        ```
+
+    - storybook 与 redux 一起使用 -- [stackoverflow -- storybook redux](https://stackoverflow.com/questions/50968590/how-to-inject-a-window-variable-in-a-storybook)
+        在 stories 中添加 redux
+        ```js
+        import React from 'react';
+        import { storiesOf } from '@storybook/react';
+        import { action } from '@storybook/addon-actions';
+        import { Provider } from 'react-redux';
+        import AuditReadyList from '../src/pages/AuditReadyList';
+        import configureStore from '../src/redux/store';
+        const store = configureStore();
+        
+        storiesOf('AuditReadyList', module)
+        .addDecorator(story => <Provider store={store}>{story()} </Provider>)
+        .add('all', () => (
+            <AuditReadyList />
+        ));
+        ```
+    
 
 ## 项目规范
 
@@ -435,6 +588,8 @@ is(map1, map2); // alternatively can use the is() function
         sources 源对象
         返回值 -- 目标对象
     - ES6 语法，扩展语法
+
+## [Ant Design Pro](https://pro.ant.design/index-cn) 的使用
 
 ## Available Scripts
 

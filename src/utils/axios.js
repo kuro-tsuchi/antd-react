@@ -2,12 +2,13 @@
  * @Author: wqjiao
  * @Date: 2019-03-15 11:27:55
  * @Last Modified by: wqjiao
- * @Last Modified time: 2019-03-15 17:09:36
+ * @Last Modified time: 2019-03-18 11:30:18
  * @Description: $axios axios 请求方法封装
  */
 import axios from 'axios';
 import {notification} from 'antd';
-import {API_BASE_URL} from '@/constants/constants';
+// import {API_BASE_URL} from '../constants/constants';
+// import {API_BASE_URL} from '@/constants/constants';
 
 /**
  * @method 接口请求数据时执行的方法
