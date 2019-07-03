@@ -1,10 +1,13 @@
 @bms-layout: ~'@{bms-prefix}-layout';
 .@{bms-layout} {
-    // 清除浮动影响
-    clear: both;
-    height: 0;
+    flex-direction: row;
+    display: flex;
     &-right {
-        margin-left: 256px;
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex: auto;
+        flex-direction: column;
     }
     &-title {
         font-size: 1.5em;

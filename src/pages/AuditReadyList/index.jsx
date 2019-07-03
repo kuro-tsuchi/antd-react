@@ -2,7 +2,7 @@
  * @Author: wqjiao
  * @Date: 2019-03-15 18:20:35
  * @Last Modified by: wqjiao
- * @Last Modified time: 2019-03-15 18:21:32
+ * @Last Modified time: 2019-03-18 13:57:55
  * @Description: AuditReadyList 待审核列表
  */
 import React from 'react';
@@ -197,3 +197,4 @@ const AuditReadyListConnect = connect(
 )(Form.create()(AuditReadyList));
 
 export default AuditReadyListConnect;
+// export default Form.create()(AuditReadyList);
