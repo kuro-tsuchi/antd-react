@@ -2,11 +2,11 @@
  * @Author: wqjiao
  * @Date: 2019-03-15 18:09:39
  * @Last Modified by: wqjiao
- * @Last Modified time: 2019-03-15 18:19:14
+ * @Last Modified time: 2019-04-30 15:49:39
  * @Description: LeftBar 页面布局 -- 左侧边栏
  */
 import React from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, withRouter, HashRouter} from 'react-router-dom';
 import {Menu, Icon, Button} from 'antd';
 import './index.less';
 
@@ -45,12 +45,20 @@ class LeftBar extends React.Component {
         }
     };
 
+    handleClick = () => {
+        this.props.history.push({
+            pathname: '/audit-ready-list',
+            query: '111111111***'
+        })
+    }
+
     render() {
         return (
             <div className="bms-layout-left" style={{width: 256}}>
                 <Button type="primary" onClick={this.toggleCollapsed} style={{marginBottom: 16}}>
                     <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
                 </Button>
+                <Button onClick={this.handleClick}>Demo</Button>
                 <Menu
                     openKeys={this.state.openKeys}
                     defaultSelectedKeys={['1']}
