@@ -6,6 +6,7 @@
  * @Description: LeftBar 页面布局 -- 左侧边栏
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link, withRouter, HashRouter} from 'react-router-dom';
 import {Menu, Icon, Button} from 'antd';
 import './index.less';
@@ -45,11 +46,23 @@ class LeftBar extends React.Component {
         }
     };
 
+    // 方式二：this.context.router.history.push
+    static contextTypes = {
+        router: PropTypes.object.isRequired,
+    }
+
     handleClick = () => {
+        // 方式一：withRouter && this.props.history.push
         this.props.history.push({
             pathname: '/audit-ready-list',
             query: '111111111***'
-        })
+        });
+
+        // 方式二：this.context.router.history.push
+        this.context.router.history.push({
+            pathname: '/audit-ready-list',
+            query: '111111111***'
+        });
     }
 
     render() {
