@@ -588,6 +588,20 @@ is(map1, map2); // alternatively can use the is() function
         sources 源对象
         返回值 -- 目标对象
     - ES6 语法，扩展语法
+    
+* 12、多层判断时，做到可以提前返回的尽量先返回，避免多层包裹
+
+    ```js
+    function (str) {
+        if (!str) {
+            // do something
+            return '没有值';
+        }
+        
+        // do something
+        return '有值';
+    }
+    ```
 
 ## [Ant Design Pro](https://pro.ant.design/index-cn) 的使用
 
