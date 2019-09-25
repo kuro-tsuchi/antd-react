@@ -441,7 +441,7 @@ is(map1, map2); // alternatively can use the is() function
         }
     }
     
-    let roles = ''; // 角色信息数组
+    let roles = []; // 角色信息数组
     ```
 
     - 方法 或 函数注释 -- method、return、param、Description
