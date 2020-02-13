@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {HashRouter, Switch, Route, Redirect} from 'react-router-dom';
-// import asyncComponent from '@/utils/asyncComponent';
+import asyncComponent from '@/utils/asyncComponent';
 import clearSession from '../utils/sessionStorage';
 // Route json file(route name、path and component)
 import routeJson from './routeJson'; // 路由数据
@@ -33,6 +33,8 @@ export default class Routes extends Component {
                                     key={key.routePath}
                                     path={key.routePath}
                                     component={key.component}
+                                    // component={key.component}
+                                    component={asyncComponent(() =>import(/* webpackChunkName: "HelpCenter" */ `@/pages/${key.name}`))}
                                     onEnter={key.isOnEnter ? enterRoute.bind(this) : ''}
                                 />
                             );
